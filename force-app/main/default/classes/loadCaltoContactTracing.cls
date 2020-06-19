@@ -81,6 +81,10 @@ global class loadCaltoContactTracing {
      */
     @InvocableMethod(label='Load Calendar Meetings for Contact Tracing')
     global static void loadCaltoContactTracing(List<employeesInputs> inputVars) {
+        // Ensure input variables are set
+        if (inputVars[0].userId == null || inputVars[0].employeeNumber == null || inputVars[0].startDate == null || inputVars[0].endDate == null) {
+            return;
+        }
         String affectedEmployeeNumber = inputVars[0].employeeNumber;
 		// Set the startDateTime to the beginning of the day of the inputStartDateTime
         // TO DO: adjust/test for timezones; currently using default GMT
