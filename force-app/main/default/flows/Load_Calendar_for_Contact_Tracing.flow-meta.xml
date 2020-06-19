@@ -79,8 +79,8 @@
     <assignments>
         <name>Set_UserId</name>
         <label>Set UserId</label>
-        <locationX>913</locationX>
-        <locationY>60</locationY>
+        <locationX>926</locationX>
+        <locationY>59</locationY>
         <assignmentItems>
             <assignToReference>UserId</assignToReference>
             <operator>Assign</operator>
@@ -109,6 +109,32 @@
             <targetReference>Get_Input_Parameters</targetReference>
         </connector>
     </assignments>
+    <decisions>
+        <description>If there is no User whose EmployeeNumber matches this Person Account&apos;s Source System ID, warn the user.</description>
+        <name>User_Exists</name>
+        <label>User Exists</label>
+        <locationX>789</locationX>
+        <locationY>239</locationY>
+        <defaultConnector>
+            <targetReference>User_Missing_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>User_Exists_Outcome</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>UserId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_UserId</targetReference>
+            </connector>
+            <label>User Exists Outcome</label>
+        </rules>
+    </decisions>
     <description>Load activities and peer employees for a given Employee that is being contact traced into the Contact Tracing contact encounters and contact encounter participants.</description>
     <interviewLabel>Load Calendar for Contact Tracing {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Load Calendar for Contact Tracing</label>
@@ -133,7 +159,7 @@
         <locationY>60</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Set_UserId</targetReference>
+            <targetReference>User_Exists</targetReference>
         </connector>
         <filters>
             <field>EmployeeNumber</field>
@@ -220,6 +246,23 @@
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
         </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>User_Missing_Screen</name>
+        <label>User Missing</label>
+        <locationX>1166</locationX>
+        <locationY>235</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>UserMissing</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;color: rgb(0, 0, 0);&quot;&gt;Error:&lt;/b&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; &lt;/span&gt;There is no Salesforce User whose Employee Number matches this person.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Therefore, calendar information has not been linked.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;In order to pull Calendar info, please ensure a User record exists for this employee and that User&apos;s Employee Number is equal to this contact&apos;s Source System ID field.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <helpText>&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;In order to pull Calendar info, please ensure a User record exists for this employee and that User&apos;s Employee Number is equal to this contact&apos;s Source System ID field.&lt;/span&gt;&lt;/p&gt;</helpText>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
