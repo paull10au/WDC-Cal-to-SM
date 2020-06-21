@@ -118,15 +118,15 @@
         <defaultConnector>
             <targetReference>User_Missing_Screen</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <defaultConnectorLabel>User Does Not Exist Outcome</defaultConnectorLabel>
         <rules>
             <name>User_Exists_Outcome</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>UserId</leftValueReference>
-                <operator>IsNull</operator>
+                <operator>NotEqualTo</operator>
                 <rightValue>
-                    <booleanValue>false</booleanValue>
+                    <stringValue/>
                 </rightValue>
             </conditions>
             <connector>
@@ -233,7 +233,7 @@
             </defaultValue>
             <fieldText>Start Date</fieldText>
             <fieldType>InputField</fieldType>
-            <helpText>&lt;p&gt;Choose the beginning date for which shifts should be collected.  Given a 2 week incubation period for COVID-19, it is recommended that you start 2 weeks back from today.&lt;/p&gt;</helpText>
+            <helpText>&lt;p&gt;Choose the beginning date for which calendar events should be collected.  Given a 2 week incubation period for COVID-19, it is recommended that you start 2 weeks back from today.&lt;/p&gt;</helpText>
             <isRequired>false</isRequired>
         </fields>
         <fields>
@@ -244,6 +244,7 @@
             </defaultValue>
             <fieldText>End Date</fieldText>
             <fieldType>InputField</fieldType>
+            <helpText>&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;Choose the end date past which calendar events should not be collected.  This defaults to today but can be backed up if the employee had already started quarantine earlier than today.&lt;/span&gt;&lt;/p&gt;</helpText>
             <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
