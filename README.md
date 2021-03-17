@@ -1,6 +1,11 @@
 # WDC-Cal-to-SM
 Salesforce Calendar to Work.com Contact Tracing
 
+<a style="margin-right: 40%;" href="https://deploy-to-sfdx.com">
+  <img align="right" alt="Deploy using SFDX"
+       src="https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg">
+</a>
+
 Salesforce Work.com offers several solutions, two of which are:
 1) Manual Contact Tracing which allows contact tracers to enter encounters and participants
 2) Calendaring including options to synchronize w/ Outlook/Google calendars
